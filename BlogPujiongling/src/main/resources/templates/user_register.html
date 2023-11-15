@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="user_register.css">
+</head>
+
+<body>
+    <header>
+        <div class="navigation">
+            <span>ブログシステム</span>
+            <div class="">
+                <a href="blog_list.html">ホーム</a>
+                <a href="blog_list.html">ログイン</a>
+                <a href="blog_edit.html">お問合せ</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="login-container">
+        <form th:action="@{/login/process}" method="post" class="login-form">
+            <h2>ログイン</h2>
+            <input type="text" name="userName" placeholder="ユーザー名" required>
+            <input type="email" name="userEmail" placeholder="メールアドレス" required>
+            <input type="password" name="userPassword" placeholder="パスワード" required>
+            <button>登録</button>
+            <p id="register"><a href="">ログイン</a></p>
+        </form>
+    </div>
+</main>
+<footer>
+    <small>&copy; PuJiongling 2023</small>
+</footer>
+<div class="bubbly"></div>
+    <div class="bubbly-1"></div>
+    <div class="bubbly-2"></div>
+    <div class="bubbly-3"></div>
+
+</body>
+
+</html>
