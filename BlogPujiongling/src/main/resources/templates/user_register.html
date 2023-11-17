@@ -2,44 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Static Template</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="user_register.css">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>User Register</title>
+	<link rel="stylesheet" href="../static/css/reset.css">
+	<link rel="stylesheet" href="../static/css/user_register.css">
+	<link rel="stylesheet" href="../static/css/user_common.css">
 </head>
 
 <body>
-    <header>
-        <div class="navigation">
-            <span>ブログシステム</span>
-            <div class="">
-                <a href="blog_list.html">ホーム</a>
-                <a href="blog_list.html">ログイン</a>
-                <a href="blog_edit.html">お問合せ</a>
-            </div>
-        </div>
-    </header>
-    <main>
-        <div class="login-container">
-        <form th:action="@{/login/process}" method="post" class="login-form">
-            <h2>ログイン</h2>
-            <input type="text" name="userName" placeholder="ユーザー名" required>
-            <input type="email" name="userEmail" placeholder="メールアドレス" required>
-            <input type="password" name="userPassword" placeholder="パスワード" required>
-            <button>登録</button>
-            <p id="register"><a href="">ログイン</a></p>
-        </form>
-    </div>
-</main>
-<footer>
-    <small>&copy; PuJiongling 2023</small>
-</footer>
-<div class="bubbly"></div>
-    <div class="bubbly-1"></div>
-    <div class="bubbly-2"></div>
-    <div class="bubbly-3"></div>
+	<header>
+		<div class="navigation">
+			<span>ブログ</span>
+			<div class="menu-nav">
+				<ul>
+				<li><a href="">ホーム</a></li>
+				<li><a href="">新規登録</a></li>
+				<li><a href="">お問合せ</a></li>
+			</ul>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="register-container">
+			<form th:action="@{/register/process}" method="post" class="register-form">
+				<h2>登録</h2>
+				<input type="text" name="userName" placeholder="ユーザー名" required>
+				<input type="email" name="userEmail" placeholder="メールアドレス" required>
+				<input type="password" name="userPassword" placeholder="パスワード" required>
+				<button>登録</button>
+				<p id="login"><a href="">ログイン</a></p>
+			</form>
+		</div>
+	</main>
+	<footer>
+		<small>&copy; PuJiongling 2023</small>
+	</footer>
+	<div class="bubbly"></div>
+	<div class="bubbly-1"></div>
+	<div class="bubbly-2"></div>
+	<div class="bubbly-3"></div>
 
 </body>
 

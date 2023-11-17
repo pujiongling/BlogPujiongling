@@ -2,45 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Static Template</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="user_login.css">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>User Login</title>
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/user_login.css}">
+	<link rel="stylesheet" th:href="@{/css/user_common.css}">
 </head>
 
 <body>
-    <header>
-        <div class="navigation">
-            <span>ブログシステム</span>
-            <div class="">
-                <a href="blog_list.html">ホーム</a>
-                <a href="blog_list.html">新規登録</a>
-                <a href="blog_edit.html">お問合せ</a>
-            </div>
-        </div>
-    </header>
-    <main>
-        <div class="login-container">
-        <form th:action="@{/login/process}" method="post" class="login-form">
-            <h2>ログイン</h2>
-            <input type="email" name="userEmail" placeholder="メールアドレス" required>
-            <input type="password" name="userPassword" placeholder="パスワード" required>
-            <button>ログイン</button>
-            <p id="register"><a href="">新規登録</a></p>
-            <p id="forgot-password">パスワードを忘れた方は<a href="">こちら</a></p>
-        </form>
-    </div>
-</main>
-<footer>
-    <small>&copy; PuJiongling 2023</small>
-</footer>
-<div class="bubbly"></div>
-    <div class="bubbly-1"></div>
-    <div class="bubbly-2"></div>
-    <div class="bubbly-3"></div>
+	<header>
+		<div class="navigation">
+			<span>ブログ</span>
+			<div class="menu-nav">
+				<ul>
+					<li><a href="">ホーム</a></li>
+					<li><a href="">新規登録</a></li>
+					<li><a href="">お問合せ</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="login-container">
+			<form th:action="@{/login/process}" method="post" class="login-form">
+				<h2>ログイン</h2>
+				<input type="email" name="userEmail" placeholder="メールアドレス" required>
+				<input type="password" name="userPassword" placeholder="パスワード" required>
+				<button class="login-btn">ログイン</button>
+				<p id="register"><a href="">新規登録</a></p>
+				<p id="forgot-password">パスワードを忘れた方は<a href="">こちら</a></p>
 
+			</form>
+
+		</div>
+	</main>
+	<footer>
+		<small>&copy; PuJiongling 2023</small>
+	</footer>
+	<div class="bubbly"></div>
+	<div class="bubbly-1"></div>
+	<div class="bubbly-2"></div>
+	<div class="bubbly-3"></div>
+
+	<script th:src="@{/js/common.js}"></script>
 </body>
 
 </html>

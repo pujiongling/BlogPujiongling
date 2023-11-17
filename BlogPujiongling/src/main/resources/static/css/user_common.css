@@ -1,0 +1,175 @@
+body {
+    margin: 0;
+    width: 100vw;
+    height: auto;
+    overflow: hidden;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    background-size: 300% 300%;
+    animation: ani 7s infinite alternate linear;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes ani {
+    0% {
+    background-position: 0% 0%;
+}
+
+100% {
+    background-position: 100% 100%;
+}
+}
+
+
+.bubbly-1 {
+	z-index: -1;
+	position: absolute;
+	top: 600px;
+	left: 50px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-image: radial-gradient(at 20px 20px, white 0%, #f0ccd5 25%, #5a93cb 45%, #cf3ebe 100%);
+	box-shadow: 0px 0px 8px 0px pink;
+	animation: run 3s linear infinite;
+	animation-delay: -1s;
+}
+
+.bubbly-2 {
+	z-index: -1;
+	position: absolute;
+	top: 600px;
+	left: 400px;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-image: radial-gradient(at 20px 20px, white 0%, #F9ACBE 25%, #7DA0C3 45%, #C754BA 100%);
+	box-shadow: 0px 0px 14px 0px pink;
+	animation: run 3s linear infinite;
+	animation-delay: -1.5s;
+}
+
+.bubbly-3 {
+	z-index: -1;
+	position: absolute;
+	top: 600px;
+	left: 600px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-image: radial-gradient(at 20px 20px, white 0%, #F9ACBE 25%, #7DA0C3 45%, #C754BA 100%);
+	box-shadow: 0px 4px 8px 0px pink;
+	animation: run 3s linear infinite;
+	animation-delay: -2.5s;
+}
+
+.bubbly-4 {
+	z-index: -1;
+	position: absolute;
+	top: 600px;
+	left: 800px;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background-image: radial-gradient(at 20px 20px, white 0%, #F9ACBE 25%, #7DA0C3 45%, #C754BA 100%);
+	box-shadow: 0px 0px 6px 0px pink;
+	animation: run 3s linear infinite;
+	animation-delay: -2s;
+}
+
+.bubbly-5 {
+	position: absolute;
+	top: 600px;
+	left: 1200px;
+	width: 220px;
+	height: 220px;
+	border-radius: 50%;
+	background-image: radial-gradient(at 20px 20px, white 0%, #F9ACBE 25%, #7DA0C3 45%, #C754BA 100%);
+	box-shadow: 0px 0px 16px 0px pink;
+	animation: run 3s linear infinite;
+	animation-delay: -0.5s;
+}
+
+@keyframes run {
+	0% {
+		transform: translate(0px, 400px);
+	}
+
+	100% {
+		transform: translate(0px, -1500px);
+	}
+}
+
+header {
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+    top: 0;
+    z-index: 1;
+}
+
+main {
+	flex: 1;
+}
+
+.navigation {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 20px;
+}
+
+.navigation a {
+	color: #fff;
+	text-decoration: none;
+	margin: 0 15px;
+}
+.menu-nav {
+	display: flex;
+	margin-right: 30px; 
+}
+.menu-nav ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+span{
+	margin-left: 20px;
+}
+
+footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    z-index: 1;
+}
+
+@media (max-width: 767px) {
+	.login-container,
+    .register-container {
+        height: auto; 
+    }
+
+    .bubbly-1,
+    .bubbly-2,
+    .bubbly-3,
+    .bubbly-4,
+    .bubbly-5 {
+        display: none; 
+	}
+
+    .register-form,
+	.login-form {
+        width: 40%;
+        top: 10vh;
+    }
+
+	.return-welcome {
+        width: 80%; /* 或者其他适当的百分比 */
+		height: auto;
+}
+}

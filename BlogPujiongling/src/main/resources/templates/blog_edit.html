@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Edit</title>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/blog_common.css">
+    <link rel="stylesheet" href="../static/css/blog_edit.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="menu_nav">
+                <ul>
+                    <li class=""><a href="blog_list.html">ホームページ</a></li>
+                    <li><a href="blog_register.html">ブログの登録</a></li>
+                    <li><a href="">お問合せ</a></li>
+                    <li><a href="">ログアウト</a></li>
+                </ul>
+            </div>
+            <div id="search">
+                <div class="icon-search"></div>
+                <input type="text" placeholder="Search...">
+            </div>
+        </nav>
+    </header>
+    <div class="wrap-body">
+        <main>
+            <section>
+                <div id="heading">
+                    <a href="edit.html">
+                        <h1>記事の編集</h1>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <div class="edit-input">
+                    <form action="" method="post">
+                        <div class="edit-details">
+                            <div class="edit-details-flex">
+                                <div>タイトル</div>
+                                <input type="text" name="blogTitle">
+                            </div>
+                            <div class="edit-details-flex">
+                                <div>カテゴリー</div>
+                                <input type="text" name="categoryName">
+                            </div>
+                            <div class="edit-details-flex">
+                                <div>画像</div>
+                                <input type="file" name="blogImage" id="blogImage">
+                                <img id="previewImage" src="#" alt="Preview" >
+                            </div>
+                            <div class="edit-details-flex">
+                                <div>記事</div>
+                                <textarea name="blogArticle" placeholder="ここに記事を入力する"></textarea>
+                            
+                                </div>
+                        </div>
+                        <div class="edit-details-flex">
+                            <input type="hidden" name="blogId">
+                            <button class="edit-btn">更新</button>
+                            <button class="back-btn" onclick="history.back();" type="button">戻る</button>
+                        </div>
+                    </form>
+                    <form action="/blog/delete" method="post">
+                        <div class="edit-details-flex">
+                            <input type="hidden" name="blogId" value="...">
+                            <button class="delete-btn">削除</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <small>&copy; PuJiongling 2023</small>
+    </footer>
+    <script src="../static/js/common.js"></script>
+</body>
+
+</html>
