@@ -1,82 +1,100 @@
 .content {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .blogs {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex-direction: column; /* 主轴方向为纵向 */
-    align-items: stretch; /* 子元素垂直方向上拉伸至相同的高度 */
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	flex-direction: column;
+	/* 主轴方向为纵向 */
+	align-items: stretch;
+	/* 子元素垂直方向上拉伸至相同的高度 */
 }
 
 .blogs li {
-    position: relative;
-    width: calc(90% - 20px); /* 每个博客占据父容器的80%，减去间距 */
-    margin: 25px auto;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 10px;
-    display: flex;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
-    transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+	position: relative;
+	width: calc(90% - 20px);
+	/* 每个博客占据父容器的80%，减去间距 */
+	margin: 25px auto;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	padding: 10px;
+	display: flex;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	/* Add box shadow */
+	transition: box-shadow 0.3s ease;
+	/* Add transition for smooth effect */
 }
+
 .blogs li:hover {
-    box-shadow: 0px 8px 16px #91DBD1; /* Change box shadow on hover */
+	box-shadow: 0px 8px 16px #91DBD1;
+	/* Change box shadow on hover */
 }
 
 .blog-content {
-    position: relative;
-    display: flex;
-    flex-grow: 1;
+	position: relative;
+	display: flex;
+	flex-grow: 1;
 }
 
 .category {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #76d2c6ab;
-    padding: 5px;
-    color: rgb(255, 255, 255);
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #76d2c6ab;
+	padding: 5px;
+	color: rgb(255, 255, 255);
 
 }
 
 
 .image {
-    width: 40%; /* 图片宽度占 40% */
-    object-fit: contain;
+	width: 40%;
+	/* 图片宽度占 40% */
+	object-fit: contain;
 }
 
 .text-content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    position: absolute;
-    top: 10%;
-    left: 42%;
-    padding: 10px;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	position: absolute;
+	top: 10%;
+	left: 42%;
+	padding: 10px;
 }
 
 .title {
-    text-align: left;
-    font-weight: bold;
-    font-size: 1.2em; /* 放大标题字体 */
-    margin-bottom: 10px; /* 增加标题和文章之间的间距 */
-    color: black;
+	text-align: left;
+	font-weight: bold;
+	font-size: 1.2em;
+	/* 放大标题字体 */
+	margin-bottom: 10px;
+	/* 增加标题和文章之间的间距 */
+	color: black;
 }
 
 .article {
 
-    color: black;
-    padding: 10px;
+	color: black;
+	padding: 10px;
 }
 
 .date {
-    text-align: justify;
-    color: #777; /* 日期颜色 */
-    font-size: 0.8em; /* 日期字体大小 */
+	text-align: justify;
+	color: #777;
+	/* 日期颜色 */
+	font-size: 0.8em;
+	/* 日期字体大小 */
+}
+
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #fff;
 }

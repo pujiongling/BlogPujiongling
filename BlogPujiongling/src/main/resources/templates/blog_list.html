@@ -2,44 +2,46 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="../static/css/reset.css">
-    <link rel="stylesheet" href="../static/css/blog_common.css">
-    <link rel="stylesheet" href="../static/css/blog_list.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Homepage</title>
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_common.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_list.css}">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="menu_nav">
-                <ul>
-                    <!--xxxさんのホームページ-->
-                    <li><a href="blog_list.html">ホームページ</a></li>
-                    <li><a href="blog_register.html">ブログの登録</a></li>
-                    <li><a href="">お問合せ</a></li>
-                    <li><a href="">ログアウト</a></li>
-                </ul>
-            </div>
-            <div id="search">
-                <div class="icon-search"></div>
-                <input type="text" placeholder="Search...">
-            </div>
-        </nav>
-    </header>
-    <div class="wrap-body">
-        <main>
-            <section>
-                <div id="heading">
-                    <a href="blog_list.html">
-                        <h1>ホームページ</h1>
-                    </a>
-                </div>
-            </section>
-            <section>
-                <div class="content" id="blogBox">
-                    <ul class="blogs">
+	<header>
+		<nav>
+			<div class="menu_nav">
+				<ul>
+					<!--xxxさんのホームページ-->
+					<li><a th:href="@{/blog/list}">ホームページ</a></li>
+					<li><a th:href="@{/blog/register}">新規記事</a></li>
+					<li><a href="">お問合せ</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
+				</ul>
+			</div>
+			<div id="search">
+				<div class="icon-search"></div>
+				<input type="text" placeholder="Search...">
+			</div>
+		</nav>
+	</header>
+	<div class="wrap-body">
+		<main>
+			<section>
+				<div id="heading">
+					<a th:href="@{/blog/list}">
+						<h1 th:text="${userName + 'のホームページ'}"></h1>
+					</a>
+				</div>
+			</section>
+			<section>
+				<div class="content" id="blogBox">
+
+					<ul class="blogs">
+						<!--
                         <li class="blog-content">
                             <a href="blog_edit.html" class="detail">
                                 <p class="category">鳥</p>
@@ -52,33 +54,24 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="test">
-                            <a href="" class="detail">
-                                <p class="category">ねこ</p>
-                                <img src="img/cat.jpg" alt="" class="image">
-                                <div class="text-content">
-                                <h3 class="title">ねこの写真</h3>
-                                <p class="date">2023.11.17 11:05</p>
-                                <p class="article">ねこを飼いたい<br>Exploring new places, experiencing diverse cultures, and capturing the beauty of our world. Join me on
-                                    a journey of discovery and adventure.</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="test">
-                            <a href="" class="detail">
-                                <p class="category">いぬ</p>
-                                <img src="img/dog.jpg" alt="" class="image">
-                                <div class="text-content">
-                                <h3 class="title">いぬの写真</h3>
-                                <p class="date">2023.11.17 11:05</p>
-                                <p class="article">いぬは情熱的<br>Exploring new places, experiencing diverse cultures, and capturing the beauty of our world. Join me on
-                                    a journey of discovery and adventure.</p>
-                            </div>
-                            </a>
-                        </li>
+
+                        -->
+						<li class="blog-content" th:each="blog:${blogList}">
+							<a class="detail" th:href="@{/blog/edit/{blogId}(blogId=${blog.blogId})}">
+								<p class="category" th:text="${blog.categoryName}"></p>
+								<img th:src="@{/blog-img/{imagePath}(imagePath=${blog.blogImage})}" alt=""
+									class="image">
+								<div class="text-content">
+									<h3 class="title" th:text="${blog.blogTitle}"></h3>
+									<p class="date" th:text="${#temporals.format(blog.postedAt, 'yyyy年MM月dd日 HH:mm')}">
+									</p>
+									<p class="article" th:text="${blog.blogArticle}"></p>
+								</div>
+							</a>
+						</li>
 
 
-                        <!--			
+						<!--			
 				<li th:each="blgs:${blogList}">
 					<a th:href="@{/blog/edit/{blogId}(blogId=${blog.blogId})}">
 						<img th:src="@{/blog-img/{imagePath}(imagePath=${blog.blogImage})}" alt="">
@@ -89,26 +82,15 @@
 					</a>
 				</li>
             -->
-                    </ul>
-                </div>
-            </section>
-        </main>
-    </div>
-    <footer>
-        <small>&copy; PuJiongling 2023</small>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var blogs = $('.blogs li');
-            var rows = Math.ceil(blogs.length / 2); // 计算需要的行数
-            for (var i = 0; i < rows; i++) {
-                blogs.slice(i * 2, (i + 1) * 2).wrapAll('<div class="blog-row"></div>');
-            }
-        });
-    </script>
-    
-
+					</ul>
+				</div>
+			</section>
+		</main>
+	</div>
+	<footer>
+		<small>&copy; PuJiongling 2023</small>
+	</footer>
+	<script th:src="@{/js/jQuery v3.7.1.js}"></script>
 </body>
 
 </html>

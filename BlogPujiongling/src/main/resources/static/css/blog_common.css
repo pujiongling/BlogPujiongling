@@ -1,117 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
+
 body {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 2.5rem;
-    width: 100%;
-    height: 100vh;
-    background: #b3b1b1b3;
-    box-sizing: border-box; /* 确保盒模型包含边框和内边距 */
+	margin: 0;
+	padding: 0;
+	padding-bottom: 2.5rem;
+	width: 100%;
+	height: 100vh;
+	background: #b3b1b1b3;
+	box-sizing: border-box;
+	/* 确保盒模型包含边框和内边距 */
+	font-family: 'Sawarabi Gothic', sans-serif;
 }
 
 .wrap-body {
-    background: #ffffff;
-    padding-bottom: 2.5rem;
-    padding-top: 2.5rem;
-    margin: 2.5rem auto 0;
-    width: 85vw;
-    display: flex; /* 或者使用 grid 布局：display: grid; */
-    flex-direction: column; /* 或者 grid-template-columns: 1fr; */
-    align-items: stretch center; /* 子元素铺满整个高度 */
-    height: auto; /* 设置高度为 auto，以适应内容的增加 */
+	background: #ffffff;
+	padding-bottom: 2.5rem;
+	padding-top: 2.5rem;
+	margin: 2.5rem auto 0;
+	width: 85vw;
+	display: flex;
+	/* 或者使用 grid 布局：display: grid; */
+	flex-direction: column;
+	/* 或者 grid-template-columns: 1fr; */
+	align-items: stretch center;
+	/* 子元素铺满整个高度 */
+	height: auto;
+	/* 设置高度为 auto，以适应内容的增加 */
 }
 
 header {
-    color: #fff;
-    padding: 5px;
-    text-align: left; /* Align the header text to the left */
-    background-color: #91DBD1;
+	color: #fff;
+	padding: 5px;
+	text-align: left;
+	/* Align the header text to the left */
+	background-color: #91DBD1;
 }
 
 header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5vw 0 5vw;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 5vw 0 5vw;
 }
 
 
 
 .menu_nav {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .menu_nav ul {
-    display: flex;
-    list-style: none;
-    font-size: 18px;
-    margin: 0;
-    padding: 0;
+	display: flex;
+	list-style: none;
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
 }
 
 .menu_nav li {
-    margin-right: 20px; /* Adjust the spacing between navigation items */
+	margin-right: 20px;
+	/* Adjust the spacing between navigation items */
 }
 
 .menu_nav a {
-    cursor: pointer;
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s; /* Add a smooth color transition on hover */
+	cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+	transition: color 0.3s;
+	/* Add a smooth color transition on hover */
 }
-.menu  ul li:hover {
-    background-color:#ffffff;
+
+.menu ul li:hover {
+	background-color: #ffffff;
 }
+
 .menu_nav a:hover {
-    color:#000000;
+	color: #000000;
 }
 
 #search {
-    width: 258px;
-    float: right; 
-    position: relative; 
-    padding: 5px;
-    display: flex;
-    align-items: center;
+	width: 258px;
+	float: right;
+	position: relative;
+	padding: 5px;
+	display: flex;
+	align-items: center;
 }
-.icon-search {	
-    background: url('../img/icon-search.png') center center no-repeat;
-    background-size: contain;
-    width: 30px;
-    height: 32px;
-    cursor: pointer;
-    margin-right: 5px; 
+
+.icon-search {
+	background: url('../img/icon-search.png') center center no-repeat;
+	background-size: contain;
+	width: 30px;
+	height: 32px;
+	cursor: pointer;
+	margin-right: 5px;
 }
-#search input {	
-    background: #FFF;
-    padding: 1px 1px 1px 10px; /* 根据需要调整左内边距 */
-    width: 220px;
-    height: 28px;
-    border: 1px solid #EEEEEE;
+
+#search input {
+	background: #FFF;
+	padding: 1px 1px 1px 10px;
+	/* 根据需要调整左内边距 */
+	width: 220px;
+	height: 28px;
+	border: 1px solid #EEEEEE;
 }
 
 #heading {
-    background: #76D2C5;
-    width: 75vw; 
-    margin:0 5vw 0 5vw ;
-    text-align: center;
-    padding: 30px 0px;
-    color: #ffffff;
-    box-sizing: border-box;
+	background: #76D2C5;
+	width: 75vw;
+	margin: 0 5vw 0 5vw;
+	text-align: center;
+	padding: 30px 0px;
+	color: #ffffff;
+	box-sizing: border-box;
 }
 
 #heading h1 {
-    font-size: 20px;
-    line-height: 1vh;
-    color: #ffffff;
+	font-size: 20px;
+	line-height: 1vh;
+	color: #ffffff;
 }
 
 
 footer {
-    position: relative; /* 将 position 设置为 relative */
-    margin-top: 2.5rem; /* 调整距离 */
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-size: 15px;
+	position: relative;
+	/* 将 position 设置为 relative */
+	margin-top: 2.5rem;
+	/* 调整距离 */
+	width: 100%;
+	text-align: center;
+	color: white;
+	font-size: 15px;
 }

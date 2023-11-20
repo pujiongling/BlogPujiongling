@@ -1,22 +1,18 @@
 package blog.com.models.entity;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
@@ -24,19 +20,27 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "blog")
+public class BlogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long blogId;
+
+	@Nonnull
+	private String blogTitle;
+	@Nonnull
+	private String categoryName;
+	@Nonnull
+	private String blogImage;
+	@Nonnull
+	private String blogArticle;
+
+	@Nonnull
 	private Long userId;
 
 	@Nonnull
-	private String userName;
-	@Nonnull
-	private String userEmail;
-	@Nonnull
-	private String userPassword;
-	@Nonnull
-	private LocalDateTime createdAt;
+	private LocalDateTime postedAt;
+
+
 
 }

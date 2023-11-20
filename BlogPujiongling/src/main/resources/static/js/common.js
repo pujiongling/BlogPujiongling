@@ -1,4 +1,4 @@
-//预览图片
+// 图片预览功能
 document.getElementById('blogImage').addEventListener('change', function (event) {
     var preview = document.getElementById('previewImage');
     var file = event.target.files[0];
@@ -14,13 +14,13 @@ document.getElementById('blogImage').addEventListener('change', function (event)
         reader.readAsDataURL(file);
     }
 });
-document.querySelectorAll('.edit-btn, .back-btn, .delete-btn,.login-btn').forEach(button => {
-    button.addEventListener('mouseenter', function() {
+// 给指定的按钮添加鼠标进入和离开事件监听器
+document.querySelectorAll('.edit-btn, .back-btn, .delete-btn, .login-btn').forEach(button => {
+    button.addEventListener('mouseenter', function () {
         this.style.transform = 'scale(1.1)';
     });
 
-    button.addEventListener('mouseleave', function() {
+    button.addEventListener('mouseleave', function () {
         this.style.transform = 'scale(1)';
     });
 });
-

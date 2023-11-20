@@ -10,10 +10,11 @@
 .login-form {
 	width: 240px;
 	height: auto;
-	margin: auto;
+	min-height: 200px;
+	margin: 20px auto 0;
 	display: flex;
 	flex-direction: column;
-	padding: 40px;
+	padding: 45px;
 	text-align: center;
 	position: relative;
 	z-index: 100;
@@ -38,25 +39,25 @@
 
 .login-form h2 {
 	font-size: 20px;
-	font-weight: bold;
+	font-weight: bolder;
 	color: #3d5245;
 	margin: 10px 15px 20px 15px;
 }
 
 .login-form input,
 .login-form button {
-	margin: 8px 0;
+	margin: 10px 0;
 	height: 3em;
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 4px;
 	padding: 0 14px;
 	color: #3d5245;
+	font-size: 15px;
 }
 
 .login-form input {
 	border-radius: 5px;
 	border: 1px solid rgb(155, 153, 153);
-	margin: 10px 0;
 }
 
 .login-form input::placeholder {
@@ -69,7 +70,7 @@
 }
 
 .login-form button {
-	margin-top: 24px;
+	margin-top: 20px;
 	background-color: rgba(57, 88, 69, 0.4);
 	color: white;
 	position: relative;
@@ -84,31 +85,48 @@
 }
 
 #register {
-    text-align: center; 
-    font-size: 14px; 
-    margin: 8px 0; 
-    color: #2c3c2e; 
+	font-size: 16.5px;
+	color: #2c3c2e;
+	position: absolute;
+	top: 81.5%;
+	bottom: 8%;
+	right: 8%;
 }
 
 #forgot-password {
-    text-align: right;
-    font-size: 14px;
+	font-size: 13px;
 	color: #050605;
-    position: absolute;
-    bottom: 0px;
-	right: 5%;
+	position: absolute;
+	top: 90%;
+	bottom: 0;
+	right: 8%;
+	padding-bottom: 1px;
 }
+
 #register a {
-    text-decoration: none;
-    color: rgba(55, 163, 202, 0.973); 
-    cursor: pointer; 
+	text-decoration: none;
+	color: rgba(55, 163, 202, 0.973);
+	cursor: pointer;
 }
+
 #forgot-password a {
-    color: rgba(55, 163, 202, 0.973);
+	color: rgba(55, 163, 202, 0.973);
 	cursor: pointer;
 }
 
 #register a:hover,
 #forgot-password a:hover {
-    color: rgba(60, 166, 227, 0.904); 
+	color: rgba(60, 166, 227, 0.904);
+}
+
+#userMistake {
+	font-size: 12.5px;
+	font-weight: 500;
+	color: red;
+	text-align: left;
+	margin: 0 0;
+}
+
+.add {
+	padding-top: 5px;
 }

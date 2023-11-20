@@ -17,8 +17,8 @@
 			<span>ブログ</span>
 			<div class="menu-nav">
 				<ul>
-					<li><a href="">ホーム</a></li>
-					<li><a href="">新規登録</a></li>
+					<li><a th:href="@{/blog/list}">ホーム</a></li>
+					<li><a th:href="@{/register}">新規登録</a></li>
 					<li><a href="">お問合せ</a></li>
 				</ul>
 			</div>
@@ -30,10 +30,16 @@
 				<h2>ログイン</h2>
 				<input type="email" name="userEmail" placeholder="メールアドレス" required>
 				<input type="password" name="userPassword" placeholder="パスワード" required>
-				<button class="login-btn">ログイン</button>
-				<p id="register"><a href="">新規登録</a></p>
-				<p id="forgot-password">パスワードを忘れた方は<a href="">こちら</a></p>
-
+				<button th:class="@{login-btn}">ログイン</button>
+				<div class="add">
+					<p id="userMistake" th:text="${userMistake}"></p>
+				</div>
+				<div class="add">
+					<p id="register"><a th:href="@{/register}">新規登録</a></p>
+				</div>
+				<div class="add">
+					<p id="forgot-password">パスワードを忘れた方は<a href="">こちら</a></p>
+				</div>
 			</form>
 
 		</div>

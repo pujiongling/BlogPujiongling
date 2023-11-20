@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>User Register</title>
-	<link rel="stylesheet" href="../static/css/reset.css">
-	<link rel="stylesheet" href="../static/css/user_register.css">
-	<link rel="stylesheet" href="../static/css/user_common.css">
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/user_register.css}">
+	<link rel="stylesheet" th:href="@{/css/user_common.css}">
 </head>
 
 <body>
@@ -17,10 +17,10 @@
 			<span>ブログ</span>
 			<div class="menu-nav">
 				<ul>
-				<li><a href="">ホーム</a></li>
-				<li><a href="">新規登録</a></li>
-				<li><a href="">お問合せ</a></li>
-			</ul>
+					<li><a href="">ホーム</a></li>
+					<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a href="">お問合せ</a></li>
+				</ul>
 			</div>
 		</div>
 	</header>
@@ -32,13 +32,15 @@
 				<input type="email" name="userEmail" placeholder="メールアドレス" required>
 				<input type="password" name="userPassword" placeholder="パスワード" required>
 				<button>登録</button>
-				<p id="login"><a href="">ログイン</a></p>
+				<p id="userExisted" th:text="${userExisted}"></p>
+				<p id="login"><a th:href="@{/login}">ログイン</a></p>
 			</form>
 		</div>
 	</main>
 	<footer>
 		<small>&copy; PuJiongling 2023</small>
 	</footer>
+	<!--bubbly-->
 	<div class="bubbly"></div>
 	<div class="bubbly-1"></div>
 	<div class="bubbly-2"></div>

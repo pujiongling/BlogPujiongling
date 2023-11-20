@@ -2,76 +2,80 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog_Register</title>
-    <link rel="stylesheet" href="../static/css/reset.css">
-    <link rel="stylesheet" href="../static/css/blog_common.css">
-    <link rel="stylesheet" href="../static/css/blog_register.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BlogRegister</title>
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_common.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_register.css}">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="menu_nav">
-                <ul>
-                    <li class="active"><a href="blog_list.html">ホームページ</a></li>
-                    <li><a href="">お問合せ</a></li>
-                    <li><a href="">ログアウト</a></li>
-                </ul>
-            </div>
-            <div id="search">
-                <div class="icon-search"></div>
-                <input type="text" placeholder="Search...">
-            </div>
-        </nav>
-    </header>
-    <div class="wrap-body">
-        <main>
-            <section>
-                <div id="heading">
-                    <a href="homepage">
-                        <h1>新規記事</h1>
-                    </a>
-                </div>
-            </section>
-            <section>
-                <div class="edit-input">
-                    <form action="" method="post">
-                        <div class="edit-details">
-                            <div class="edit-details-flex">
-                                <div>タイトル</div>
-                                <input type="text" name="blogTitle">
-                            </div>
-                            <div class="edit-details-flex">
-                                <div>カテゴリー</div>
-                                <input type="text" name="categoryName">
-                            </div>
-                            <div class="edit-details-flex">
-                                <div>画像</div>
-                                <input type="file" name="blogImage" id="blogImage">
-                                <img id="previewImage" src="#" alt="Preview" >
-                            </div>
-                            <div class="edit-details-flex">
-                                <div>記事</div>
-                                <textarea name="blogArticle" placeholder="ここに記事を入力する"></textarea>
-                                </div>
-                        </div>
-                        <div class="edit-details-flex">
-                            <input type="hidden" name="blogId">
-                            <button class="edit-btn">登録</button>
-                            <button class="back-btn" onclick="history.back();" type="button">戻る</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </main>
+	<header>
+		<nav>
+			<div class="menu_nav">
+				<ul>
+					<li class="active"><a th:href="@{/blog/list}" th:text="${userName + 'のホームページ'}"></a></li>
+					<li><a href="">お問合せ</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
+				</ul>
+			</div>
+			<div id="search">
+				<div class="icon-search"></div>
+				<input type="text" placeholder="Search...">
+			</div>
+		</nav>
+	</header>
+	<div class="wrap-body">
+		<main>
+			<section>
+				<div id="heading">
+					<a th:href="@{/blog/register}">
+						<h1>新規記事</h1>
+					</a>
+				</div>
+			</section>
+			<section>
+				<div class="edit-input">
+					<form th:action="@{/blog/register/process}" method="post" enctype="multipart/form-data">
+						<div class="edit-details">
+							<div class="edit-details-flex">
+								<div>タイトル</div>
+								<input type="text" name="blogTitle">
+							</div>
+							<div class="edit-details-flex">
+								<div>カテゴリー</div>
+								<input type="text" name="categoryName">
+							</div>
+							<div class="edit-details-flex">
+								<div>画像</div>
+								<input type="file" name="blogImage" id="blogImage">
+								<img id="previewImage" src="#" alt="Preview">
+							</div>
+							<div class="edit-details-flex">
+								<div>記事</div>
+								<textarea name="blogArticle" placeholder="ここに記事を入力する"></textarea>
+							</div>
+							<div>
+								<p id="saveError" th:text="${error}"></p>
+							</div>
+						</div>
+						<div class="edit-details-flex">
+							<input type="hidden" name="blogId">
+							<button class="edit-btn">登録</button>
+							<button class="back-btn" onclick="history.back();" type="button">戻る</button>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
 
-    </div>
-    <footer>
-        <small>&copy; PuJiongling 2023</small>
-    </footer>
-    <script src="../static/js/common.js"></script>
+	</div>
+	<footer>
+		<small>&copy; PuJiongling 2023</small>
+	</footer>
+	<script th:src="@{/js/common.js}"></script>
+	<script th:src="@{/js/jQuery v3.7.1.js}"></script>
 </body>
 
 </html>
