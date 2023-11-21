@@ -41,6 +41,13 @@ public class BlogEntity {
 	@Nonnull
 	private LocalDateTime postedAt;
 
-
+	public void updateBlog(String blogTitle, String categoryName, String blogImage, String blogArticle, Long userId) {
+		this.blogTitle = blogTitle;
+		this.categoryName = categoryName;
+		this.blogImage = blogImage;
+		this.blogArticle = blogArticle;
+		this.userId = userId;
+		this.postedAt = LocalDateTime.now();
+	}
 
 }

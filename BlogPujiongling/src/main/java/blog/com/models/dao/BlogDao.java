@@ -22,8 +22,8 @@ public interface BlogDao extends JpaRepository<BlogEntity, Long> {
 	List<BlogEntity> findBlogByUserId(@Param("userId") Long userId);
 
 	// blog_idに基づいてブログを取得する
-	BlogEntity findByBlogId(Long BlogId);
+	BlogEntity findByBlogId(Long blogId);
 
-	int deleteByBlogId(Long BlogId);
+	int deleteByBlogId(Long blogId);
 
 }

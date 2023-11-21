@@ -1,0 +1,43 @@
+.blog-process {
+	border: 1px solid #76D2C5;
+	height: 20%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	padding: 60px 30px 60px 30px;
+	position: relative;
+	margin: 10vh auto;
+	align-items: center;
+	justify-content: center;
+	/* Add styles for the "floating" effect */
+	transition: box-shadow 0.3s ease;
+}
+
+.blog-process:hover {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+	text-align: center;
+	font-size: 22px;
+	padding: 15px 0;
+	margin-bottom: 20px;
+}
+
+.back-btn {
+	border: none;
+	padding: 0.8rem;
+	cursor: pointer;
+	font-size: 15px;
+	background-color: #71c7c8;
+	color: white;
+	border-radius: 5px;
+	text-decoration: none;
+	transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+	background-color: #76D2C5;
+	color: white;
+}

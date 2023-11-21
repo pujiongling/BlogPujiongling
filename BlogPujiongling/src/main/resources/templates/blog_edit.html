@@ -39,6 +39,8 @@
 			<section>
 				<div class="edit-input">
 					<form th:action="@{/blog/edit/process}" method="post" enctype="multipart/form-data">
+						<img id="registeredImage" th:if="${blogList.blogImage != null}"
+							th:src="@{/blog-img/{imagePath}(imagePath=${blogList.blogImage})}" alt="Original Image">
 						<div class="edit-details">
 							<input type="hidden" name="blogId" th:value="${blogList.blogId}">
 							<div class="edit-details-flex">
@@ -51,7 +53,7 @@
 							</div>
 							<div class="edit-details-flex">
 								<div>画像</div>
-								<input type="file" name="blogImage" id="blogImage">
+								<input type="file" name="blogImage" id="blogImage" onchange="handleFileSelect()">
 								<img id="previewImage"
 									th:src="@{/blog-img/{imagePath}(imagePath=${blogList.blogImage})}" alt="Preview">
 							</div>
@@ -67,9 +69,9 @@
 							<button class="back-btn" onclick="history.back();" type="button">戻る</button>
 						</div>
 					</form>
-					<form th:action="@{/blog/delete}" method="post">
+					<form th:action="@{/blog/delete/process}" method="post">
 						<div class="edit-details-flex">
-							<input type="hidden" name="blogId" value="...">
+							<input type="hidden" name="blogId" th:value="${blogList.blogId}">
 							<button class="delete-btn">削除</button>
 						</div>
 					</form>

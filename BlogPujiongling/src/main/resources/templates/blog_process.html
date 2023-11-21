@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Homepage</title>
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_common.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_process.css}">
+</head>
+
+<body>
+	<header>
+		<nav>
+			<div class="menu_nav">
+				<ul>
+					<li><a th:href="@{/blog/list}">ホームページ</a></li>
+					<li><a th:href="@{/blog/register}">新規記事</a></li>
+					<li><a href="">お問合せ</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
+				</ul>
+			</div>
+			<div id="search">
+				<div class="icon-search"></div>
+				<input type="text" placeholder="Search...">
+			</div>
+		</nav>
+	</header>
+	<div class="wrap-body">
+		<main>
+			<section>
+				<div class="blog-process">
+					<h1 th:text="${blogProcess}"></h1>
+					<a th:href="@{/blog/list}" class="back-btn">ホームページに戻る</a></div>
+			</section>
+		</main>
+	</div>
+	<footer>
+		<small>&copy; PuJiongling 2023</small>
+	</footer>
+	<script th:src="@{/js/common.js}"></script>
+</body>
+
+</html>

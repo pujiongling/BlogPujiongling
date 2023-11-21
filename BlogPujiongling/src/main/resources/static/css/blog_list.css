@@ -1,6 +1,12 @@
 .content {
 	display: flex;
 	flex-wrap: wrap;
+	width: 75vw;
+	/*
+	border: 0.5px solid grey;
+	box-sizing: border-box;*/
+	margin: 20px 8vw 0 8vw;
+	padding: 0;
 }
 
 .blogs {
@@ -11,29 +17,28 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 	flex-direction: column;
-	/* 主轴方向为纵向 */
 	align-items: stretch;
-	/* 子元素垂直方向上拉伸至相同的高度 */
+
 }
 
 .blogs li {
 	position: relative;
-	width: calc(90% - 20px);
-	/* 每个博客占据父容器的80%，减去间距 */
-	margin: 25px auto;
+	width: 69vw !important;
+	margin: 20px auto;
 	box-sizing: border-box;
 	border: 1px solid #ccc;
-	padding: 10px;
+	padding: 5px 5px 0 0;
 	display: flex;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-	/* Add box shadow */
 	transition: box-shadow 0.3s ease;
-	/* Add transition for smooth effect */
+	height: 180px;
+	overflow: hidden;
+
 }
 
 .blogs li:hover {
 	box-shadow: 0px 8px 16px #91DBD1;
-	/* Change box shadow on hover */
+
 }
 
 .blog-content {
@@ -49,15 +54,20 @@
 	background: #76d2c6ab;
 	padding: 5px;
 	color: rgb(255, 255, 255);
+	z-index: 1;
 
 }
 
 
 .image {
-	width: 40%;
-	/* 图片宽度占 40% */
-	object-fit: contain;
+	max-width: 100%;
+	width: 28% !important;
+	object-fit: cover;
+	position: relative;
+	top: 1%;
+	left: 1%;
 }
+
 
 .text-content {
 	display: flex;
@@ -65,7 +75,7 @@
 	flex-grow: 1;
 	position: absolute;
 	top: 10%;
-	left: 42%;
+	left: 30%;
 	padding: 10px;
 }
 
@@ -73,14 +83,15 @@
 	text-align: left;
 	font-weight: bold;
 	font-size: 1.2em;
-	/* 放大标题字体 */
+
 	margin-bottom: 10px;
-	/* 增加标题和文章之间的间距 */
+
 	color: black;
 }
 
 .article {
-
+	inline-size: 2;
+	font-size: 16.5px;
 	color: black;
 	padding: 10px;
 }
@@ -88,9 +99,8 @@
 .date {
 	text-align: justify;
 	color: #777;
-	/* 日期颜色 */
 	font-size: 0.8em;
-	/* 日期字体大小 */
+
 }
 
 a {
@@ -98,3 +108,5 @@ a {
 	text-decoration: none;
 	color: #fff;
 }
+
+/*----aside-----*/

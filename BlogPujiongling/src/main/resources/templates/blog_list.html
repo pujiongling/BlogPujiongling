@@ -15,7 +15,6 @@
 		<nav>
 			<div class="menu_nav">
 				<ul>
-					<!--xxxさんのホームページ-->
 					<li><a th:href="@{/blog/list}">ホームページ</a></li>
 					<li><a th:href="@{/blog/register}">新規記事</a></li>
 					<li><a href="">お問合せ</a></li>
@@ -33,10 +32,12 @@
 			<section>
 				<div id="heading">
 					<a th:href="@{/blog/list}">
+						<!--${userName}さんのホームページ-->
 						<h1 th:text="${userName + 'のホームページ'}"></h1>
 					</a>
 				</div>
 			</section>
+			<!--content-->
 			<section>
 				<div class="content" id="blogBox">
 
@@ -85,6 +86,11 @@
 					</ul>
 				</div>
 			</section>
+			<section>
+				<aside>
+				</aside>
+			</section>
+
 		</main>
 	</div>
 	<footer>
