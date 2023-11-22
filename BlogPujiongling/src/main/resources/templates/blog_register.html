@@ -17,13 +17,17 @@
 				<ul>
 					<li class="active"><a th:href="@{/blog/list}" th:text="${userName + 'のホームページ'}"></a></li>
 					<li><a href="">お問合せ</a></li>
-					<li><a th:href="@{/logout}">ログアウト</a></li>
+					<li>
+						<a th:href="${loggedIn ? '/logout' : '/login'}" th:text="${loggedIn ? 'ログアウト' : 'ログイン'}"></a>
+					</li>
 				</ul>
 			</div>
-			<div id="search">
-				<div class="icon-search"></div>
-				<input type="text" placeholder="Search...">
-			</div>
+			<form th:action="@{/search}" method="post" target="_blank" name="search">
+				<div id="search">
+					<div class="icon-search" onclick="document.forms['search'].submit()"></div>
+					<input type="text" placeholder="Search..." name="query" th:value="${query}">
+				</div>
+			</form>
 		</nav>
 	</header>
 	<div class="wrap-body">
@@ -38,6 +42,7 @@
 			<section>
 				<div class="edit-input">
 					<form th:action="@{/blog/register/process}" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="userId" th:value="${userId}">
 						<div class="edit-details">
 							<div class="edit-details-flex">
 								<div>タイトル</div>

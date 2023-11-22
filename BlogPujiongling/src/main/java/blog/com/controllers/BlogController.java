@@ -30,191 +30,186 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 
-	// ログインしている人の情報を取得
-	@Autowired
-	private HttpSession session;
-
-	// 個人ブログの一覧を表示するメソッド
+	// ユーザーIDに基づいてブログ一覧を取得し、表示する。
 	@GetMapping("/blog/list")
-	public String getBlogList(Model model) {
-		// セッションからログインしている人の情報を取得
-		UserEntity user = (UserEntity) session.getAttribute("user");
+	public String getBlogList(Long userId, Model model) {
 		// ユーザーがログインしているかを確認
-		if (user == null) {
-			// ユーザーがログインしていない場合
-			return "redirect:/blog/list/all";
+		if (blogService.checkUserLoggedIn()) {
+			// ログイン中の場合の処理
+			// userIdに基づいて、個人ブログの一覧取得、ユーザー名を画面に渡す
+			model.addAttribute("userName", blogService.getCurrentUser().getUserName());
 		} else {
-			// ユーザーがログインしている場合
-			// userからuserIdを取得する
-			Long userId = user.getUserId();
-			// user_idに基づいてブログの情報を取得する
-			List<BlogEntity> blogList = blogService.getBlogByUserId(userId);
-			// 取得したブログを降順に並び替える
-			Collections.sort(blogList, (blog1, blog2) -> blog2.getPostedAt().compareTo(blog1.getPostedAt()));
-			// 取得したブログ情報とユーザー情報とを画面に渡す ブログ一覧画面を表示
-			model.addAttribute("blogList", blogList);
-			model.addAttribute("userName", user.getUserName());
-			return "blog_list.html";
+			// 未ログインの場合の処理
+			// ゲストとして、ブログを一覧できる
+			model.addAttribute("userName", "ゲスト");
 		}
-	}
-
-	// 待完善
-	// 登録したブログ全ての一覧を表示するメソッド
-	@GetMapping("/blog/list/all")
-	public String getBlogAllList(Model model) {
-		// 登録したブログ全てを取得する
-		List<BlogEntity> blogList = blogService.getAllBlog();
-		model.addAttribute("blogList", blogList);
+		// ユーザーのログイン状態に応じて、navigatorのフィールドを設定
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
+		blogService.getBlogList(userId, model);
 		return "blog_list.html";
 	}
 
-	// ブログの登録画面を表示するメソッド
+	// ブログの登録画面を表示する
 	@GetMapping("/blog/register")
-	public String getBlogRegisterPage(Model model) {
-		// セッションからログインしている人の情報を取得
-		UserEntity user = (UserEntity) session.getAttribute("user");
+	public String getBlogRegisterPage(Long userId, Model model) {
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		// ユーザーがログインしているかを確認
-		if (user == null) {
-			// ユーザーがログインしていない場合 ログイン画面に転送
-			return "redirect:/login";
-		} else {
-			// ユーザーがログインしている場合
-			// ユーザー名を画面に渡す ブログ登録画面を表示
-			model.addAttribute("userName", user.getUserName());
+		if (blogService.checkUserLoggedIn()) {
+			// ログイン中の場合の処理
+			// ユーザー名を画面に渡す、ブログの登録画面を表示
+			model.addAttribute("userName", blogService.getCurrentUser().getUserName());
 			return "blog_register.html";
+		} else {
+			// 未ログインの場合の処理
+			// 登録できないのメーセージを画面に示
+			model.addAttribute("blogProcess", "ゲストはブログを登録できません。");
+			model.addAttribute("login", "ログインまたは");
+			model.addAttribute("register", "新規登録してください");
+			return "blog_process.html";
 		}
 	}
 
-	// ブログの登録内容を保存するメソッド
+	// ブログの登録内容を保存する
 	@PostMapping("/blog/register/process")
 	public String blogRegister(@RequestParam String blogTitle, @RequestParam String categoryName,
-			@RequestParam MultipartFile blogImage, @RequestParam String blogArticle, Model model) {
-		// セッションからログインしている人の情報を取得
-		UserEntity user = (UserEntity) session.getAttribute("user");
+			@RequestParam MultipartFile blogImage, @RequestParam String blogArticle, Long userId, Model model) {
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		// ユーザーがログインしているかを確認
-		if (user == null) {
-			// ユーザーがログインしていない場合 ログイン画面に転送
-			return "redirect:/login";
-		} else {
-			// ユーザーがログインしている場合
-			// userからuserIdを取得する
-			Long userId = user.getUserId();
-			// SimpleDateFormatクラスを使用して
-			// 現在の日時情報を "yyyy-MM-dd-HH-mm-ss-" フォーマットで取得
-			// そして、blogImageから元のファイル名を取得、フォーマットされた日時文字列と連結して、fileName変数に代入
+		if (blogService.checkUserLoggedIn()) {
+			// ログイン中の場合の処理
+			// 現在の日時情報を "yyyy-MM-dd-HH-mm-ss-" フォーマットで取得し、ファイル名に利用
+			model.addAttribute("userName", blogService.getCurrentUser().getUserName());
 			String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date())
 					+ blogImage.getOriginalFilename();
-			// 画面から登録した内容をBlogServiceクラスの保存処理メソッドに渡し、保存成功したかを確認
-			if (blogService.saveBlog(blogTitle, categoryName, fileName, blogArticle, userId) != null) {
-				// try-catchで 受け取ったファイルを保存
-				try {
-					// blogImageのInputStreamからファイルをコピーして、指定されたパスに保存
-					Files.copy(blogImage.getInputStream(), Path.of("src/main/resources/static/blog-img/" + fileName));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				// ブログの登録が成功した場合、成功メーセージを画面に渡す
+			// ブログの保存処理を呼び出し、結果を確認
+			if (blogService.saveBlog(blogTitle, categoryName, fileName, blogArticle, userId, model) != null) {
+				// ブログの内容を保存成功した場合、受け取ったファイルを保存
+				blogService.saveBlogImage(blogImage, fileName);
 				model.addAttribute("blogProcess", "新しい記事を追加しました");
 				return "blog_process.html";
 			} else {
-				// ブログの登録が失敗した場合、エラーメッセージを画面に渡す
-				model.addAttribute("error", "保存失敗しました。後でもう一度お試しください。");
-				return "redirect:/blog/register";
+				// ブログの編集内容を保存失敗した場合
+				model.addAttribute("blogProcess", "保存失敗しました。後でもう一度お試しください。");
+				return "blog_process.html";
 			}
-
+		} else {
+			// 未ログインの場合の処理
+			model.addAttribute("blogProcess", "アカウントがログアウトされました。再度ログインしてください。");
+			return "blog_process.html";
 		}
 	}
 
-	// ブログ編集画面を表示するメソッド
+	/*-----------------------------------11.22更新-----------------------------------*/
+	// ブログディテールを表示する
+	@GetMapping("/blog/detail/{blogId}")
+	public String getBlogDetailPage(@PathVariable Long blogId, Model model) {
+		// ユーザーのログイン状態に応じて、navigatorのフィールドを設定
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
+		// ブログの詳細を取得する
+		BlogEntity blogList = blogService.getBlogPost(blogId);
+		model.addAttribute("blogList", blogList);
+		return "blog_detail.html";
+	}
+
+	// ブログ編集画面を表示する
 	@GetMapping("/blog/edit/{blogId}")
 	public String getBlogEditPage(@PathVariable Long blogId, Model model) {
-		// セッションからログインしている人の情報を取得
-		UserEntity user = (UserEntity) session.getAttribute("user");
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		// ユーザーがログインしているかを確認
-		if (user == null) {
-			// ユーザーがログインしていない場合 ログイン画面に転送
-			return "redirect:/login";
-		} else {
-			// ユーザーがログインしている場合
-			// blogIdを基づいてブログの詳細内容を取得
+		if (blogService.checkUserLoggedIn()) {
+			// ログイン中の場合の処理
+			// ブログの詳細を取得
+			model.addAttribute("userName", blogService.getCurrentUser().getUserName());
 			BlogEntity blogList = blogService.getBlogPost(blogId);
-			if (blogList == null) {
-				// ブログが存在していない場合
-				return "redirect:/blog/list";
-			} else {
-				// ブログに詳細が取得した場合
-				// ブログ情報とユーザー情報を画面に渡す
-				model.addAttribute("userName", user.getUserName());
-				model.addAttribute("blogList", blogList);
-			}
+			model.addAttribute("blogList", blogList);
 			return "blog_edit.html";
+		} else {
+			// 未ログインの場合の処理
+			model.addAttribute("blogProcess", "ゲストはブログを編集できません。");
+			model.addAttribute("login", "ログインまたは");
+			model.addAttribute("register", "新規登録してください");
+			return "blog_process.html";
 		}
 	}
 
-	// ブログの編集内容を保存するメソッド
+	// ブログの編集内容を保存する
 	@PostMapping("/blog/edit/process")
 	public String blogEditProcess(@RequestParam Long blogId, @RequestParam String blogTitle,
 			@RequestParam String categoryName, @RequestParam MultipartFile blogImage, @RequestParam String blogArticle,
 			Model model) {
-		// セッションからログインしている人の情報を取得
-		UserEntity user = (UserEntity) session.getAttribute("user");
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		// ユーザーがログインしているかを確認
-		if (user == null) {
-			// ユーザーがログインしていない場合 ログイン画面に転送
-			return "redirect:/login";
-		} else {
-			// ユーザーがログインしている場合
-			// userからuserIdを取得する
-			Long userId = user.getUserId();
-			// SimpleDateFormatクラスを使用して
-			// 現在の日時情報を "yyyy-MM-dd-HH-mm-ss-" フォーマットで取得
-			// そして、blogImageから元のファイル名を取得、フォーマットされた日時文字列と連結して、fileName変数に代入
-			String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date())
-					+ blogImage.getOriginalFilename();
-			// 画面からのデータをBlogServiceクラスの編集処理メソッドに渡し、編集の内容を保存成功したかを確認
-			if (blogService.editBlog(blogId, blogTitle, categoryName, fileName, blogArticle, userId)) {
-				// ブログの保存が成功した場合
-				// try-catchで 受け取ったファイルを保存
-				try {
-					// blogImageのInputStreamからファイルをコピーして、指定されたパスに保存
-					Files.copy(blogImage.getInputStream(), Path.of("src/main/resources/static/blog-img/" + fileName));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				// 編集成功した場合、成功メーセージを画面に渡す
-				model.addAttribute("blogProcess", "記事を編集しました");
-				return "blog_process.html";
+		if (blogService.checkUserLoggedIn()) {
+			// ログイン中の場合の処理
+			// ファイル名前を指定
+
+			// String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new
+			// Date())
+			// + blogImage.getOriginalFilename();
+
+			// 追加コード
+			//
+			String fileName;
+			if (blogImage.getOriginalFilename().isEmpty()) {
+				// ファイルが選択されていない場合、元のファイル名を使用
+				fileName = blogService.getBlogPost(blogId).getBlogImage();
+				model.addAttribute("blogProcess", "記事が変更されませんでした");
 			} else {
-				// 編集失敗した場合、エラーメッセージを画面に渡す
-				model.addAttribute("error", "保存失敗しました。後でもう一度お試しください。");
-				return "redirect:/blog/edit/" + blogId;
+				// 新しいファイルを選択した場合、ファイル名を生成
+				fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date())
+						+ blogImage.getOriginalFilename();
+				// ブログの編集処理を呼び出し、結果を確認
+				if (blogService.editBlog(blogId, blogTitle, categoryName, fileName, blogArticle, blogId)) {
+					// ブログの編集内容を保存成功した場合、受け取ったファイルを保存
+					blogService.saveBlogImage(blogImage, fileName);
+					model.addAttribute("blogProcess", "記事を編集しました");
+
+				} else {
+					// ブログの編集内容を保存失敗した場合
+					model.addAttribute("blogProcess", "編集失敗しました。後でもう一度お試しください。");
+				}
+
 			}
-
+			return "blog_process.html";
+		} else {
+			// 未ログインの場合の処理
+			model.addAttribute("blogProcess", "アカウントがログアウトされました。再度ログインしてください。");
+			return "blog_process.html";
 		}
-
 	}
 
-	// 待完善
 	// ブログを削除するメソッド
 	@PostMapping("/blog/delete/process")
-	public String blogEditProcess(@RequestParam Long blogId, Model model) {
-		// セッションからログインしている人の情報を取得
-		UserEntity user = (UserEntity) session.getAttribute("user");
+	public String blogDeteleProcess(@RequestParam Long blogId, Long userId, Model model) {
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		// ユーザーがログインしているかを確認
-		if (user == null) {
-			// ユーザーがログインしていない場合 ログイン画面に転送
-			return "redirect:/login";
-		} else {
-			// 画面からのデータをBlogServiceクラスの削除処理メソッドに渡し、削除成功したかを確認
-			if (blogService.deleteBlog(blogId)) {
-				// 削除成功した場合、成功メーセージを画面に渡す
+		if (blogService.checkUserLoggedIn()) {
+			// ログイン中の場合の処理
+			// userIdとblogIdに基づいて、ブログを削除
+			if (blogService.deleteBlog(userId, blogId)) {
 				model.addAttribute("blogProcess", "記事を削除しました");
 				return "blog_process.html";
 			} else {
-				// 削除失敗した場合、エラーメッセージを画面に渡す
-				model.addAttribute("error", "保存失敗しました。後でもう一度お試しください。");
-				return "redirect:/blog/edit/" + blogId;
+				model.addAttribute("blogProcess", "削除失敗しました。後でもう一度お試しください。");
+				return "blog_process.html";
 			}
+		} else {
+			// 未ログインの場合の処理
+			model.addAttribute("blogProcess", "ゲストはブログを編集できません。");
+			model.addAttribute("login", "ログインまたは");
+			model.addAttribute("register", "新規登録してください");
+			return "blog_process.html";
 		}
+	}
+
+	/*-----------------------------------11.22更新-----------------------------------*/
+	// ブログの検索機能を処理し、結果を表示する
+	@PostMapping("/search")
+	public String search(@RequestParam String query, Long userId, Model model) {
+		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
+		// user_idと画面から受け取ったqueryに基づいての検索
+		model.addAttribute("blogList", blogService.searchBlogList(query, userId, model));
+		model.addAttribute("query", query);
+		return "blog_search.html";
 	}
 }

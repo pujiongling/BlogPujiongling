@@ -17,10 +17,6 @@
 				<ul>
 					<li><a th:href="@{/blog/list}">ホームページ</a></li>
 					<li><a th:href="@{/blog/register}">新規記事</a></li>
-					<!--
-					<li><a th:href="@{/login}" th:text="${login}"></a></li>
-					<li><a th:href="@{/logout}" th:text="${logout}"></a></li>
-					-->
 					<li>
 						<a th:href="${loggedIn ? '/logout' : '/login'}" th:text="${loggedIn ? 'ログアウト' : 'ログイン'}"></a>
 					</li>
@@ -38,9 +34,9 @@
 		<main>
 			<section>
 				<div id="heading">
-					<a th:href="@{/blog/list}">
+					<a>
 						<!--${userName}さんのホームページ-->
-						<h1 th:text="${userName + 'のホームページ'}"></h1>
+						<h1>検索結果</h1>
 					</a>
 				</div>
 			</section>
@@ -65,16 +61,12 @@
 
                         -->
 						<li class="blog-content" th:each="blog:${blogList}">
-							<!--
 							<a class="detail" th:href="@{/blog/edit/{blogId}(blogId=${blog.blogId})}">
-								-->
-							<a class="detail" th:href="@{/blog/detail/{blogId}(blogId=${blog.blogId})}">
 								<p class="category" th:text="${blog.categoryName}"></p>
 								<img th:src="@{/blog-img/{imagePath}(imagePath=${blog.blogImage})}" alt=""
 									class="image">
 								<div class="text-content">
 									<h3 class="title" th:text="${blog.blogTitle}"></h3>
-									<p class="postedBy" th:text="${postedBy}"></p>
 									<p class="date" th:text="${#temporals.format(blog.postedAt, 'yyyy年MM月dd日 HH:mm')}">
 									</p>
 									<p class="article" th:text="${blog.blogArticle}"></p>
@@ -82,7 +74,7 @@
 							</a>
 						</li>
 
-
+						<a th:href="@{/blogList}">戻る</a>
 						<!--			
 				<li th:each="blgs:${blogList}">
 					<a th:href="@{/blog/edit/{blogId}(blogId=${blog.blogId})}">

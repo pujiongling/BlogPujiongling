@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BlogDetail</title>
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_common.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_detail.css}">
+</head>
+
+<body>
+	<header>
+		<nav>
+			<div class="menu_nav">
+				<ul>
+					<li class=""><a th:href="@{/blog/list}">ホーム</a></li>
+					<li><a th:href="@{/blog/register}">新規記事</a></li>
+					<li>
+						<a th:href="${loggedIn ? '/logout' : '/login'}" th:text="${loggedIn ? 'ログアウト' : 'ログイン'}"></a>
+					</li>
+				</ul>
+			</div>
+			<form th:action="@{/search}" method="post" target="_blank" name="search">
+				<div id="search">
+					<div class="icon-search" onclick="document.forms['search'].submit()"></div>
+					<input type="text" placeholder="Search..." name="query" th:value="${query}">
+				</div>
+			</form>
+		</nav>
+	</header>
+	<div class="wrap-body">
+		<main>
+			<section>
+				<div id="heading">
+					<a th:href="@{/blog/edit}">
+						<h1>記事一覧</h1>
+					</a>
+				</div>
+			</section>
+			<section>
+				<div class="blog-detail">
+					<img id="registeredImage" th:if="${blogList.blogImage != null}"
+						th:src="@{/blog-img/{imagePath}(imagePath=${blogList.blogImage})}" alt="Original Image">
+					<p class="category" th:text="${blogList.categoryName}"></p>
+					<h3 class="title" th:text="${blogList.blogTitle}"></h3>
+					<p class="date" th:text="${#temporals.format(blogList.postedAt, 'yyyy年MM月dd日 HH:mm')}">
+					<div id="article">
+						<p class="article" th:text="${blogList.blogArticle}"></p>
+						<div id="edit-blog">
+							<a th:href="@{/blog/edit/{blogId}(blogId=${blogList.blogId})}">記事の編集</a>
+						</div>
+						<form th:action="@{/blog/delete/process}" method="post">
+							<div class="edit-details-flex">
+								<input type="hidden" name="blogId" th:value="${blogList.blogId}">
+								<button class="delete-btn">削除</button>
+							</div>
+						</form>
+						<div>
+							<form th:action=" @{/blog/comment}" method="post">
+								<input type="hidden" name="blogId" th:value="${blogList.blogId}">
+								<textarea name="comment" placeholder="ここにコメントを入力してください"></textarea>
+								<button class="comment-btn">コメントする</button>
+							</form>
+						</div>
+						<button class="back-btn" onclick="history.back();" type="button">戻る</button>
+					</div>
+			</section>
+		</main>
+	</div>
+	<footer>
+		<small>&copy; PuJiongling 2023</small>
+	</footer>
+	<script th:src="@{/js/common.js}"></script>
+	<script th:src="@{/js/jQuery v3.7.1.js}"></script>
+</body>
+
+</html>
