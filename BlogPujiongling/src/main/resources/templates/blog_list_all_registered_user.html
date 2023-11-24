@@ -24,9 +24,6 @@
 					<li>
 						<a th:href="${loggedIn ? '/logout' : '/login'}" th:text="${loggedIn ? 'ログアウト' : 'ログイン'}"></a>
 					</li>
-					<li>
-						<a th:href="${loggedIn ? '' : '/register'}" th:text="${loggedIn ? '' : '新規登録'}"></a>
-					</li>
 				</ul>
 			</div>
 			<form th:action="@{/search}" method="post" target="_blank" name="search">
@@ -43,7 +40,7 @@
 				<div id="heading">
 					<a th:href="@{/blog/list}">
 						<!--${userName}さんのホームページ-->
-						<h1 th:text="${userName + 'のホームページ'}"></h1>
+						<h1> 最新記事</h1>
 					</a>
 				</div>
 			</section>
@@ -75,7 +72,6 @@
 								<p class="category" th:text="${blog.categoryName}"></p>
 								<img th:src="@{/blog-img/{imagePath}(imagePath=${blog.blogImage})}" alt=""
 									class="image">
-
 								<div class="text-content">
 									<h3 class="title" th:text="${blog.blogTitle}"></h3>
 									<p class="postedBy" th:text="${postedBy}"></p>

@@ -11,7 +11,6 @@
 	margin: 10vh auto;
 	align-items: center;
 	justify-content: center;
-	/* Add styles for the "floating" effect */
 	transition: box-shadow 0.3s ease;
 }
 
@@ -59,4 +58,8 @@ h1 {
 .back-btn:hover {
 	background-color: #76D2C5;
 	color: white;
+}
+
+#return {
+	padding: 5px auto !important;
 }

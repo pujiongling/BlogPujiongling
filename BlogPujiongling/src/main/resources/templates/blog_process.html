@@ -17,9 +17,11 @@
 				<ul>
 					<li><a th:href="@{/blog/list}">ホームページ</a></li>
 					<li><a th:href="@{/blog/register}">新規記事</a></li>
-					<li><a href="">お問合せ</a></li>
 					<li>
 						<a th:href="${loggedIn ? '/logout' : '/login'}" th:text="${loggedIn ? 'ログアウト' : 'ログイン'}"></a>
+					</li>
+					<li>
+						<a th:href="${loggedIn ? '' : '/register'}" th:text="${loggedIn ? '' : '新規登録'}"></a>
 					</li>
 				</ul>
 			</div>
@@ -41,6 +43,11 @@
 						<a th:href="@{/register}" th:text="${register}"></a>
 					</p>
 					<a th:href="@{/blog/list}" class="back-btn">ホームページに戻る</a>
+					<!--
+					<div class="button-flex">
+						<button class="back-btn" onclick="history.back();" type="button" id="return">前のページに戻る</button>
+					</div>
+					-->
 				</div>
 			</section>
 		</main>

@@ -1,22 +1,200 @@
+/*blog-detail*/
 .blog-detail {
 	border: 1px solid black;
-	margin: auto;
-	width: 65vw;
+	margin: 5% auto 0 auto;
+	width: 75%;
 	padding: 24px 0px;
+	display: flex;
+	align-items: flex-start;
+	position: relative;
 }
 
+/* 设置图片样式 */
 #registeredImage {
 	width: 200px;
-	left: 10%;
+	margin-left: 3%;
+	top: 5%;
 }
 
+/* 设置信息容器样式 */
+.info-container {
+	display: flex;
+	flex-direction: column;
+	align-self: flex-start;
+	margin-left: 4%;
+}
+
+.category,
+.title,
+.date,
+.article {
+	margin-bottom: 10px;
+	/* 底边距 10px */
+}
+
+/* 设置分类样式 */
 .category {
 	background: #76d2c6ab;
-	padding: 5px;
 	color: rgb(255, 255, 255);
+	padding: 5px;
+	width: fit-content;
 }
 
+/* 设置标题样式 */
 .title {
-	font-size: bolder;
 	font-size: 22px;
+	font-weight: bolder;
+}
+
+/* 设置日期样式 */
+.date {
+	color: grey;
+	font-size: 15px;
+}
+
+/* 设置文章样式 */
+.article {
+	margin-left: 10%;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+}
+
+/* 设置按钮样式 */
+.button-flex button,
+.button-flex a {
+	margin-top: 20px;
+	transition: background-color 0.3s;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 15px;
+	padding: 5px;
+	margin-right: 10px;
+}
+
+.button-flex a {
+	position: absolute;
+	bottom: 30%;
+	right: 5%;
+
+}
+
+#edit-blog {
+	padding: 25px auto;
+}
+
+#edit-blog,
+.back-btn {
+	background-color: #28a745;
+}
+
+.delete-btn {
+	background-color: #dc3545;
+}
+
+.button-flex button:hover,
+.button-flex a:hover {
+	background-color: #d1d1d1;
+	/* 鼠标悬停时的背景颜色 */
+	color: black;
+	cursor: pointer;
+}
+
+
+.button-flex button:hover {
+	background-color: #d1d1d1;
+	/* 鼠标悬停时的背景颜色 */
+	color: black;
+	cursor: pointer;
+}
+
+
+
+/* 设置评论样式 */
+.comment {
+	border-radius: 8px;
+	position: relative;
+	margin: 5vh 20vw;
+}
+
+/* 设置评论显示容器样式 */
+.comment-display {
+	max-height: 300px;
+	/* 控制评论显示容器的最大高度，可以根据需要调整 */
+	overflow-y: auto;
+	/* 当评论过多时，添加滚动条 */
+}
+
+/* 设置评论列表样式 */
+.comments {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* 设置单个评论样式 */
+.comment-content {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	padding: 10px;
+	position: relative;
+}
+
+/* 设置评论者样式 */
+.reviewer {
+	font-weight: bold;
+}
+
+/* 设置评论日期样式 */
+.date {
+	color: grey;
+	font-size: 12px;
+}
+
+/* 设置评论内容样式 */
+.comment-content p {
+	margin: 5px 0;
+}
+
+/* 设置删除按钮样式 */
+.delete-btn {
+	background-color: #dc3545;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+/* 设置评论文本框样式 */
+textarea {
+	width: 100%;
+	height: 70px;
+	/* 根据需要调整文本框的高度 */
+	margin-bottom: 10px;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+/* 设置评论按钮样式 */
+.comment-btn {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 8px 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+/* 鼠标悬停时的评论按钮样式 */
+.comment-btn:hover {
+	background-color: #218838;
 }

@@ -20,6 +20,9 @@
 					<li>
 						<a th:href="${loggedIn ? '/logout' : '/login'}" th:text="${loggedIn ? 'ログアウト' : 'ログイン'}"></a>
 					</li>
+					<li>
+						<a th:href="${loggedIn ? '' : '/register'}" th:text="${loggedIn ? '' : '新規登録'}"></a>
+					</li>
 				</ul>
 			</div>
 			<form th:action="@{/search}" method="post" target="_blank" name="search">

@@ -43,29 +43,62 @@
 				<div class="blog-detail">
 					<img id="registeredImage" th:if="${blogList.blogImage != null}"
 						th:src="@{/blog-img/{imagePath}(imagePath=${blogList.blogImage})}" alt="Original Image">
-					<p class="category" th:text="${blogList.categoryName}"></p>
-					<h3 class="title" th:text="${blogList.blogTitle}"></h3>
-					<p class="date" th:text="${#temporals.format(blogList.postedAt, 'yyyy年MM月dd日 HH:mm')}">
-					<div id="article">
-						<p class="article" th:text="${blogList.blogArticle}"></p>
-						<div id="edit-blog">
-							<a th:href="@{/blog/edit/{blogId}(blogId=${blogList.blogId})}">記事の編集</a>
+					<div class="info-container">
+						<p class="category" th:text="${blogList.categoryName}"></p>
+						<h3 class="title" th:text="${blogList.blogTitle}"></h3>
+						<p class="date" th:text="${#temporals.format(blogList.postedAt, 'yyyy年MM月dd日 HH:mm')}">
+						<div id="article">
+							<p class="article" th:text="${blogList.blogArticle}"></p>
 						</div>
-						<form th:action="@{/blog/delete/process}" method="post">
-							<div class="edit-details-flex">
-								<input type="hidden" name="blogId" th:value="${blogList.blogId}">
-								<button class="delete-btn">削除</button>
+						<div class="button-flex">
+							<a th:href="@{/blog/edit/{blogId}(blogId=${blogList.blogId})}" id="edit-blog">記事を編集</a>
+						</div>
+						<div class="button">
+							<!--
+							<div class="button-flex">
+								<form th:action="@{/blog/edit/{blogId}}" method="get">
+									<input type="hidden" name="blogId" th:value="${blogList.blogId}">
+									<button type="submit" id="edit-blog">記事を編集</button>
+								</form>
 							</div>
-						</form>
-						<div>
-							<form th:action=" @{/blog/comment}" method="post">
-								<input type="hidden" name="blogId" th:value="${blogList.blogId}">
-								<textarea name="comment" placeholder="ここにコメントを入力してください"></textarea>
-								<button class="comment-btn">コメントする</button>
-							</form>
+							-->
+							<div class="button-flex">
+								<form th:action="@{/blog/delete/process}" method="post">
+
+									<input type="hidden" name="blogId" th:value="${blogList.blogId}">
+									<button class="delete-btn">記事を削除</button>
+
+								</form>
+							</div>
+							<div class="button-flex">
+								<button class="back-btn" onclick="history.back();" type="button">ホームページに戻る</button>
+							</div>
 						</div>
-						<button class="back-btn" onclick="history.back();" type="button">戻る</button>
 					</div>
+				</div>
+			</section>
+			<section>
+				<div class="comment">
+					<div class="comment-display">
+						<ul class="comments">
+							<li class="comment-content" th:each="comment:${commentList}">
+								<p class="reviewer" th:text="${comment.reviewer}"></p>
+								<p class="date" th:text="${#temporals.format(comment.commentAt, 'yyyy年MM月dd日 HH:mm')}">
+								</p>
+								<p class="comment-content" th:text="${comment.commentContent}"></p>
+								<form th:action="@{/comment/delete/process}" method="post">
+									<input type="hidden" name="commentId" th:value="${comment.commentId}">
+									<button class="delete-btn">コメントを削除</button>
+								</form>
+							</li>
+						</ul>
+					</div>
+					<form th:action=" @{/blog/comment}" method="post">
+						<input type="hidden" name="blogId" th:value="${blogList.blogId}">
+						<textarea name="commentContent" placeholder="ここにコメントを入力してください"></textarea>
+						<button class="comment-btn">コメントする</button>
+					</form>
+				</div>
 			</section>
 		</main>
 	</div>

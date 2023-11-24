@@ -2,9 +2,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 75vw;
-	/*
-	border: 0.5px solid grey;
-	box-sizing: border-box;*/
 	margin: 20px 8vw 0 8vw;
 	padding: 0;
 }
@@ -96,7 +93,8 @@
 	padding: 10px;
 }
 
-.date {
+.date,
+.userName {
 	text-align: justify;
 	color: #777;
 	font-size: 0.8em;

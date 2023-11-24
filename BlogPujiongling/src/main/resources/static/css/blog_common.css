@@ -8,7 +8,6 @@ body {
 	height: 100vh;
 	background: #b3b1b1b3;
 	box-sizing: border-box;
-	/* 确保盒模型包含边框和内边距 */
 	font-family: 'Sawarabi Gothic', sans-serif;
 }
 
@@ -19,11 +18,8 @@ body {
 	margin: 2.5rem auto 0;
 	width: 85vw;
 	display: flex;
-	/* 或者使用 grid 布局：display: grid; */
 	flex-direction: column;
-	/* 或者 grid-template-columns: 1fr; */
 	align-items: stretch center;
-	/* 子元素铺满整个高度 */
 	height: auto;
 	/* 设置高度为 auto，以适应内容的增加 */
 }
@@ -32,7 +28,6 @@ header {
 	color: #fff;
 	padding: 5px;
 	text-align: left;
-	/* Align the header text to the left */
 	background-color: #91DBD1;
 }
 
@@ -60,7 +55,6 @@ header nav {
 
 .menu_nav li {
 	margin-right: 20px;
-	/* Adjust the spacing between navigation items */
 }
 
 .menu_nav a {
@@ -68,7 +62,6 @@ header nav {
 	text-decoration: none;
 	color: #fff;
 	transition: color 0.3s;
-	/* Add a smooth color transition on hover */
 }
 
 .menu ul li:hover {
@@ -125,9 +118,7 @@ header nav {
 
 footer {
 	position: relative;
-	/* 将 position 设置为 relative */
 	margin-top: 2.5rem;
-	/* 调整距离 */
 	width: 100%;
 	text-align: center;
 	color: white;

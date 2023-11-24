@@ -37,7 +37,6 @@ select {
 	-moz-appearance: none;
 	font-size: 1rem;
 	color: #594A4E;
-	font-family: 'Kiwi Maru';
 	width: 75%;
 	transition: box-shadow 0.3s;
 }

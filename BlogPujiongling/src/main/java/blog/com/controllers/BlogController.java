@@ -1,10 +1,6 @@
 package blog.com.controllers;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -18,17 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import blog.com.models.entity.BlogEntity;
-import blog.com.models.entity.UserEntity;
+import blog.com.models.entity.CommentEntity;
 import blog.com.services.BlogService;
-import jakarta.servlet.http.HttpSession;
+import blog.com.services.CommentService;
 
 @Controller
 public class BlogController {
 
 	// BlogServiceクラスを読み込んでメソッドを使えるために
-	// BlogControllerのメンバ変数blogServiceとして宣言する
+	// BlogControllerのメンバ変数として宣言する
 	@Autowired
 	private BlogService blogService;
+
+	// CommentServiceクラスの読み込みとメソッドの使用を可能にするため、
+	// BlogControllerのメンバ変数として宣言します。
+	@Autowired
+	private CommentService commentSerivce;
 
 	// ユーザーIDに基づいてブログ一覧を取得し、表示する。
 	@GetMapping("/blog/list")
@@ -44,6 +45,7 @@ public class BlogController {
 			model.addAttribute("userName", "ゲスト");
 		}
 		// ユーザーのログイン状態に応じて、navigatorのフィールドを設定
+		// ログイン中の場合は、"ログアウト"；未ログインの場合は"ログイン"；
 		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		blogService.getBlogList(userId, model);
 		return "blog_list.html";
@@ -99,15 +101,18 @@ public class BlogController {
 		}
 	}
 
-	/*-----------------------------------11.22更新-----------------------------------*/
-	// ブログディテールを表示する
+	/*-----------------------------------11.23更新-----------------------------------*/
+	// ブログDetail画面を表示する
 	@GetMapping("/blog/detail/{blogId}")
 	public String getBlogDetailPage(@PathVariable Long blogId, Model model) {
+		// blogIdに基づいて、関連のコメントを取得
+		List<CommentEntity> commentList = commentSerivce.getCommentsByBlogId(blogId);
 		// ユーザーのログイン状態に応じて、navigatorのフィールドを設定
 		model.addAttribute("loggedIn", blogService.checkUserLoggedIn());
 		// ブログの詳細を取得する
-		BlogEntity blogList = blogService.getBlogPost(blogId);
+		BlogEntity blogList = (BlogEntity) blogService.getBlogPost(blogId);
 		model.addAttribute("blogList", blogList);
+		model.addAttribute("commentList", commentList);
 		return "blog_detail.html";
 	}
 
@@ -143,6 +148,7 @@ public class BlogController {
 			// ログイン中の場合の処理
 			// ファイル名前を指定
 
+			// 元のコード
 			// String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new
 			// Date())
 			// + blogImage.getOriginalFilename();
@@ -155,7 +161,7 @@ public class BlogController {
 				fileName = blogService.getBlogPost(blogId).getBlogImage();
 				model.addAttribute("blogProcess", "記事が変更されませんでした");
 			} else {
-				// 新しいファイルを選択した場合、ファイル名を生成
+				// 新しいファイルを選択された場合、ファイル名を生成
 				fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-").format(new Date())
 						+ blogImage.getOriginalFilename();
 				// ブログの編集処理を呼び出し、結果を確認
@@ -202,7 +208,6 @@ public class BlogController {
 		}
 	}
 
-	/*-----------------------------------11.22更新-----------------------------------*/
 	// ブログの検索機能を処理し、結果を表示する
 	@PostMapping("/search")
 	public String search(@RequestParam String query, Long userId, Model model) {
